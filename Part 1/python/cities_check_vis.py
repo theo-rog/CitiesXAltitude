@@ -11,15 +11,9 @@ import matplotlib.colors as mcolors
 import numpy as np
 import pandas as pd
 
-from pathlib import Path
 
-
-# Folder where the current .py file is located
-base_dir = Path(__file__).resolve().parent
-file_path = base_dir / "cities_check_ID.csv"
-
-# Loading the dataset
-cities = pd.read_csv(file_path)
+data_link = '/Users/theorogers/Desktop/SkillsyBits/Projects/SQL/cities project/cities_check_IDcounts.csv'
+cities = pd.read_csv(data_link)
 
 cities["log haversine"] = np.log(cities['haversine_km'])
 cities["log pop_ratio"] = np.log(cities['pop_ratio'])
