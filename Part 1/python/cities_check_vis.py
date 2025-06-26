@@ -40,7 +40,7 @@ def count_2_colour(count):
 
 
 
-def plot_scatter(log_dist = True,log_pop = True,x_boundary = 3,y_boundary = 30):
+def plot_scatter(log_dist = True,log_pop = True,x_boundary = 3,y_boundary = 10):
 
 
     x = cities['log ALPR'] if log_pop else cities['ALPR']
@@ -54,17 +54,23 @@ def plot_scatter(log_dist = True,log_pop = True,x_boundary = 3,y_boundary = 30):
 
         )
 
+    if x_boundary is not None:
+        x_boundary = np.log10(x_boundary) if log_pop else x_boundary
+        plt.axvline(x_boundary, color='purple')
 
-    x_line = np.log10(x_boundary) if log_pop else x_boundary
-    y_line = np.log10(y_boundary) if log_dist else y_boundary
-    plt.axvline(x_line, color='purple', linestyle='--')
-    plt.axhline(y_line, color='blue', linestyle='--')
+    if y_boundary is not None:
+        y_boundary = np.log10(y_boundary) if log_dist else y_boundary
+        plt.axhline(y_boundary, color='blue', linestyle='--')  
+
+  
+
 
     plt.xlabel("ALPR (log)" if log_pop else "ALPR")
     plt.ylabel("Haversine Distance (log)" if log_dist else "Haversine Distance")
-    plt.title("Matching Cities from Simple and cities1000 datasets")
+    plt.title("Potential Matches from simplemaps and geonames Datasets")
     plt.show()
 
 #%% Cell 4, run the function
-plot_scatter(log_dist=True,log_pop=True)
+plot_scatter(log_dist=True,log_pop=True,x_boundary=None,y_boundary=30)
+plot_scatter(log_dist=True,log_pop=True,x_boundary=3,y_boundary=10)
 # %%
